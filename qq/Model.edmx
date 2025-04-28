@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище k8sLoverModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvailabilityMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="int" Nullable="false" />
+          <Property Name="availability" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="industry" Type="varchar" MaxLength="255" />
+          <Property Name="country_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ErrorRateMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="int" Nullable="false" />
+          <Property Name="error_rate" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Incidents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="start_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="end_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="IncidentToRootCauses">
+          <Key>
+            <PropertyRef Name="incident_id" />
+            <PropertyRef Name="root_cause_id" />
+          </Key>
+          <Property Name="incident_id" Type="int" Nullable="false" />
+          <Property Name="root_cause_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncidentToTypes">
+          <Key>
+            <PropertyRef Name="incident_id" />
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="incident_id" Type="int" Nullable="false" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncidentTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="impact_level" Type="int" />
+          <Property Name="recovery_time_goal" Type="int" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="incident_id" Type="int" />
+          <Property Name="published_at" Type="datetimeoffset" Precision="7" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="source" Type="varchar" MaxLength="255" />
+          <Property Name="popularity" Type="int" />
+          <Property Name="sentiment_score" Type="int" />
+        </EntityType>
+        <EntityType Name="RemediationActions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="incident_id" Type="int" />
+          <Property Name="team_id" Type="int" />
+          <Property Name="action_description" Type="text" />
+          <Property Name="loss" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="currency_code" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="ResponseTimeMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="int" Nullable="false" />
+          <Property Name="avg_response_time" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="RootCauseCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RootCauses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="SREMetrics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="timestamp" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="StocksData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="timestamp" Type="datetimeoffset" Precision="7" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="volume" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="specialization" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Availabil__metri__5BE2A6F2">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AvailabilityMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Companies__count__398D8EEE">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Companies">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorRate__metri__6383C8BA">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="ErrorRateMetrics" Type="Self.ErrorRateMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ErrorRateMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Incidents__compa__440B1D61">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Incidents">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IncidentT__incid__46E78A0C">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="1" />
+          <End Role="IncidentToTypes" Type="Self.IncidentToTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IncidentToTypes">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IncidentT__incid__4AB81AF0">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="1" />
+          <End Role="IncidentToRootCauses" Type="Self.IncidentToRootCauses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IncidentToRootCauses">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IncidentT__root___4BAC3F29">
+          <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="1" />
+          <End Role="IncidentToRootCauses" Type="Self.IncidentToRootCauses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RootCauses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IncidentToRootCauses">
+              <PropertyRef Name="root_cause_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IncidentT__type___47DBAE45">
+          <End Role="IncidentTypes" Type="Self.IncidentTypes" Multiplicity="1" />
+          <End Role="IncidentToTypes" Type="Self.IncidentToTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncidentTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IncidentToTypes">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__incident_i__693CA210">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__curre__5535A963">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="currency_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__incid__534D60F1">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__team___5441852A">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResponseT__metri__5FB337D6">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="ResponseTimeMetrics" Type="Self.ResponseTimeMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ResponseTimeMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RootCause__categ__412EB0B6">
+          <End Role="RootCauseCategories" Type="Self.RootCauseCategories" Multiplicity="0..1" />
+          <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RootCauseCategories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RootCauses">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SREMetric__compa__5812160E">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SREMetrics">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StocksDat__compa__66603565">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="StocksData" Type="Self.StocksData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StocksData">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__company_i__5070F446">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище k8sLoverModelContainer">
+          <EntitySet Name="AvailabilityMetrics" EntityType="Self.AvailabilityMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorRateMetrics" EntityType="Self.ErrorRateMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incidents" EntityType="Self.Incidents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncidentToRootCauses" EntityType="Self.IncidentToRootCauses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncidentToTypes" EntityType="Self.IncidentToTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncidentTypes" EntityType="Self.IncidentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemediationActions" EntityType="Self.RemediationActions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponseTimeMetrics" EntityType="Self.ResponseTimeMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RootCauseCategories" EntityType="Self.RootCauseCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RootCauses" EntityType="Self.RootCauses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SREMetrics" EntityType="Self.SREMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StocksData" EntityType="Self.StocksData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Companies__count__398D8EEE" Association="Self.FK__Companies__count__398D8EEE">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Companies" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorRate__metri__6383C8BA" Association="Self.FK__ErrorRate__metri__6383C8BA">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="ErrorRateMetrics" EntitySet="ErrorRateMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Incidents__compa__440B1D61" Association="Self.FK__Incidents__compa__440B1D61">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Incidents" EntitySet="Incidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IncidentT__incid__46E78A0C" Association="Self.FK__IncidentT__incid__46E78A0C">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="IncidentToTypes" EntitySet="IncidentToTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IncidentT__incid__4AB81AF0" Association="Self.FK__IncidentT__incid__4AB81AF0">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="IncidentToRootCauses" EntitySet="IncidentToRootCauses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IncidentT__root___4BAC3F29" Association="Self.FK__IncidentT__root___4BAC3F29">
+            <End Role="RootCauses" EntitySet="RootCauses" />
+            <End Role="IncidentToRootCauses" EntitySet="IncidentToRootCauses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IncidentT__type___47DBAE45" Association="Self.FK__IncidentT__type___47DBAE45">
+            <End Role="IncidentTypes" EntitySet="IncidentTypes" />
+            <End Role="IncidentToTypes" EntitySet="IncidentToTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__incident_i__693CA210" Association="Self.FK__News__incident_i__693CA210">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__curre__5535A963" Association="Self.FK__Remediati__curre__5535A963">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__incid__534D60F1" Association="Self.FK__Remediati__incid__534D60F1">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__team___5441852A" Association="Self.FK__Remediati__team___5441852A">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResponseT__metri__5FB337D6" Association="Self.FK__ResponseT__metri__5FB337D6">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="ResponseTimeMetrics" EntitySet="ResponseTimeMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RootCause__categ__412EB0B6" Association="Self.FK__RootCause__categ__412EB0B6">
+            <End Role="RootCauseCategories" EntitySet="RootCauseCategories" />
+            <End Role="RootCauses" EntitySet="RootCauses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SREMetric__compa__5812160E" Association="Self.FK__SREMetric__compa__5812160E">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StocksDat__compa__66603565" Association="Self.FK__StocksDat__compa__66603565">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="StocksData" EntitySet="StocksData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__company_i__5070F446" Association="Self.FK__Teams__company_i__5070F446">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="k8sLoverModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AvailabilityMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="Int32" Nullable="false" />
+          <Property Name="availability" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__Availabil__metri__5BE2A6F2" FromRole="AvailabilityMetrics" ToRole="SREMetrics" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="industry" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="country_id" Type="Int32" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK__Companies__count__398D8EEE" FromRole="Companies" ToRole="Countries" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__Incidents__compa__440B1D61" FromRole="Companies" ToRole="Incidents" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__SREMetric__compa__5812160E" FromRole="Companies" ToRole="SREMetrics" />
+          <NavigationProperty Name="StocksData" Relationship="Self.FK__StocksDat__compa__66603565" FromRole="Companies" ToRole="StocksData" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Teams__company_i__5070F446" FromRole="Companies" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Companies__count__398D8EEE" FromRole="Countries" ToRole="Companies" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__curre__5535A963" FromRole="Currencies" ToRole="RemediationActions" />
+        </EntityType>
+        <EntityType Name="ErrorRateMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="Int32" Nullable="false" />
+          <Property Name="error_rate" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ErrorRate__metri__6383C8BA" FromRole="ErrorRateMetrics" ToRole="SREMetrics" />
+        </EntityType>
+        <EntityType Name="Incidents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="start_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="end_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Incidents__compa__440B1D61" FromRole="Incidents" ToRole="Companies" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__incident_i__693CA210" FromRole="Incidents" ToRole="News" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__incid__534D60F1" FromRole="Incidents" ToRole="RemediationActions" />
+          <NavigationProperty Name="RootCauses" Relationship="Self.IncidentToRootCauses" FromRole="Incidents" ToRole="RootCauses" />
+          <NavigationProperty Name="IncidentTypes" Relationship="Self.IncidentToTypes" FromRole="Incidents" ToRole="IncidentTypes" />
+        </EntityType>
+        <EntityType Name="IncidentTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="impact_level" Type="Int32" />
+          <Property Name="recovery_time_goal" Type="Int32" />
+          <NavigationProperty Name="Incidents" Relationship="Self.IncidentToTypes" FromRole="IncidentTypes" ToRole="Incidents" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="incident_id" Type="Int32" />
+          <Property Name="published_at" Type="DateTimeOffset" Precision="7" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="source" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="popularity" Type="Int32" />
+          <Property Name="sentiment_score" Type="Int32" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__News__incident_i__693CA210" FromRole="News" ToRole="Incidents" />
+        </EntityType>
+        <EntityType Name="RemediationActions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="incident_id" Type="Int32" />
+          <Property Name="team_id" Type="Int32" />
+          <Property Name="action_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="loss" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="currency_code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Currencies" Relationship="Self.FK__Remediati__curre__5535A963" FromRole="RemediationActions" ToRole="Currencies" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__Remediati__incid__534D60F1" FromRole="RemediationActions" ToRole="Incidents" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Remediati__team___5441852A" FromRole="RemediationActions" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="ResponseTimeMetrics">
+          <Key>
+            <PropertyRef Name="metric_id" />
+          </Key>
+          <Property Name="metric_id" Type="Int32" Nullable="false" />
+          <Property Name="avg_response_time" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ResponseT__metri__5FB337D6" FromRole="ResponseTimeMetrics" ToRole="SREMetrics" />
+        </EntityType>
+        <EntityType Name="RootCauseCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RootCauses" Relationship="Self.FK__RootCause__categ__412EB0B6" FromRole="RootCauseCategories" ToRole="RootCauses" />
+        </EntityType>
+        <EntityType Name="RootCauses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RootCauseCategories" Relationship="Self.FK__RootCause__categ__412EB0B6" FromRole="RootCauses" ToRole="RootCauseCategories" />
+          <NavigationProperty Name="Incidents" Relationship="Self.IncidentToRootCauses" FromRole="RootCauses" ToRole="Incidents" />
+        </EntityType>
+        <EntityType Name="SREMetrics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="timestamp" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="AvailabilityMetrics" Relationship="Self.FK__Availabil__metri__5BE2A6F2" FromRole="SREMetrics" ToRole="AvailabilityMetrics" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__SREMetric__compa__5812160E" FromRole="SREMetrics" ToRole="Companies" />
+          <NavigationProperty Name="ErrorRateMetrics" Relationship="Self.FK__ErrorRate__metri__6383C8BA" FromRole="SREMetrics" ToRole="ErrorRateMetrics" />
+          <NavigationProperty Name="ResponseTimeMetrics" Relationship="Self.FK__ResponseT__metri__5FB337D6" FromRole="SREMetrics" ToRole="ResponseTimeMetrics" />
+        </EntityType>
+        <EntityType Name="StocksData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="timestamp" Type="DateTimeOffset" Precision="7" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="volume" Type="Int32" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__StocksDat__compa__66603565" FromRole="StocksData" ToRole="Companies" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="specialization" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Teams__company_i__5070F446" FromRole="Teams" ToRole="Companies" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__team___5441852A" FromRole="Teams" ToRole="RemediationActions" />
+        </EntityType>
+        <Association Name="FK__Availabil__metri__5BE2A6F2">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AvailabilityMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Companies__count__398D8EEE">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Companies">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Incidents__compa__440B1D61">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Incidents">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SREMetric__compa__5812160E">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SREMetrics">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StocksDat__compa__66603565">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="StocksData" Type="Self.StocksData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StocksData">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__company_i__5070F446">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__curre__5535A963">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="currency_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorRate__metri__6383C8BA">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="ErrorRateMetrics" Type="Self.ErrorRateMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ErrorRateMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__incident_i__693CA210">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__incid__534D60F1">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incidents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="incident_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Remediati__team___5441852A">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RemediationActions">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResponseT__metri__5FB337D6">
+          <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
+          <End Role="ResponseTimeMetrics" Type="Self.ResponseTimeMetrics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SREMetrics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ResponseTimeMetrics">
+              <PropertyRef Name="metric_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RootCause__categ__412EB0B6">
+          <End Role="RootCauseCategories" Type="Self.RootCauseCategories" Multiplicity="0..1" />
+          <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RootCauseCategories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RootCauses">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IncidentToRootCauses">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
+          <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="*" />
+        </Association>
+        <Association Name="IncidentToTypes">
+          <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
+          <End Role="IncidentTypes" Type="Self.IncidentTypes" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="k8sLoverEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AvailabilityMetrics" EntityType="Self.AvailabilityMetrics" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" />
+          <EntitySet Name="ErrorRateMetrics" EntityType="Self.ErrorRateMetrics" />
+          <EntitySet Name="Incidents" EntityType="Self.Incidents" />
+          <EntitySet Name="IncidentTypes" EntityType="Self.IncidentTypes" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="RemediationActions" EntityType="Self.RemediationActions" />
+          <EntitySet Name="ResponseTimeMetrics" EntityType="Self.ResponseTimeMetrics" />
+          <EntitySet Name="RootCauseCategories" EntityType="Self.RootCauseCategories" />
+          <EntitySet Name="RootCauses" EntityType="Self.RootCauses" />
+          <EntitySet Name="SREMetrics" EntityType="Self.SREMetrics" />
+          <EntitySet Name="StocksData" EntityType="Self.StocksData" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" />
+          <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Companies__count__398D8EEE" Association="Self.FK__Companies__count__398D8EEE">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Companies" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Incidents__compa__440B1D61" Association="Self.FK__Incidents__compa__440B1D61">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Incidents" EntitySet="Incidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SREMetric__compa__5812160E" Association="Self.FK__SREMetric__compa__5812160E">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StocksDat__compa__66603565" Association="Self.FK__StocksDat__compa__66603565">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="StocksData" EntitySet="StocksData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__company_i__5070F446" Association="Self.FK__Teams__company_i__5070F446">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__curre__5535A963" Association="Self.FK__Remediati__curre__5535A963">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorRate__metri__6383C8BA" Association="Self.FK__ErrorRate__metri__6383C8BA">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="ErrorRateMetrics" EntitySet="ErrorRateMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__incident_i__693CA210" Association="Self.FK__News__incident_i__693CA210">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__incid__534D60F1" Association="Self.FK__Remediati__incid__534D60F1">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Remediati__team___5441852A" Association="Self.FK__Remediati__team___5441852A">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="RemediationActions" EntitySet="RemediationActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResponseT__metri__5FB337D6" Association="Self.FK__ResponseT__metri__5FB337D6">
+            <End Role="SREMetrics" EntitySet="SREMetrics" />
+            <End Role="ResponseTimeMetrics" EntitySet="ResponseTimeMetrics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RootCause__categ__412EB0B6" Association="Self.FK__RootCause__categ__412EB0B6">
+            <End Role="RootCauseCategories" EntitySet="RootCauseCategories" />
+            <End Role="RootCauses" EntitySet="RootCauses" />
+          </AssociationSet>
+          <AssociationSet Name="IncidentToRootCauses" Association="Self.IncidentToRootCauses">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="RootCauses" EntitySet="RootCauses" />
+          </AssociationSet>
+          <AssociationSet Name="IncidentToTypes" Association="Self.IncidentToTypes">
+            <End Role="Incidents" EntitySet="Incidents" />
+            <End Role="IncidentTypes" EntitySet="IncidentTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище k8sLoverModelContainer" CdmEntityContainer="k8sLoverEntities">
+          <EntitySetMapping Name="AvailabilityMetrics">
+            <EntityTypeMapping TypeName="k8sLoverModel.AvailabilityMetrics">
+              <MappingFragment StoreEntitySet="AvailabilityMetrics">
+                <ScalarProperty Name="metric_id" ColumnName="metric_id" />
+                <ScalarProperty Name="availability" ColumnName="availability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="k8sLoverModel.Companies">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="k8sLoverModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="k8sLoverModel.Currencies">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorRateMetrics">
+            <EntityTypeMapping TypeName="k8sLoverModel.ErrorRateMetrics">
+              <MappingFragment StoreEntitySet="ErrorRateMetrics">
+                <ScalarProperty Name="metric_id" ColumnName="metric_id" />
+                <ScalarProperty Name="error_rate" ColumnName="error_rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incidents">
+            <EntityTypeMapping TypeName="k8sLoverModel.Incidents">
+              <MappingFragment StoreEntitySet="Incidents">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentTypes">
+            <EntityTypeMapping TypeName="k8sLoverModel.IncidentTypes">
+              <MappingFragment StoreEntitySet="IncidentTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="impact_level" ColumnName="impact_level" />
+                <ScalarProperty Name="recovery_time_goal" ColumnName="recovery_time_goal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="k8sLoverModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="incident_id" ColumnName="incident_id" />
+                <ScalarProperty Name="published_at" ColumnName="published_at" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="popularity" ColumnName="popularity" />
+                <ScalarProperty Name="sentiment_score" ColumnName="sentiment_score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemediationActions">
+            <EntityTypeMapping TypeName="k8sLoverModel.RemediationActions">
+              <MappingFragment StoreEntitySet="RemediationActions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="incident_id" ColumnName="incident_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="action_description" ColumnName="action_description" />
+                <ScalarProperty Name="loss" ColumnName="loss" />
+                <ScalarProperty Name="currency_code" ColumnName="currency_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResponseTimeMetrics">
+            <EntityTypeMapping TypeName="k8sLoverModel.ResponseTimeMetrics">
+              <MappingFragment StoreEntitySet="ResponseTimeMetrics">
+                <ScalarProperty Name="metric_id" ColumnName="metric_id" />
+                <ScalarProperty Name="avg_response_time" ColumnName="avg_response_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RootCauseCategories">
+            <EntityTypeMapping TypeName="k8sLoverModel.RootCauseCategories">
+              <MappingFragment StoreEntitySet="RootCauseCategories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RootCauses">
+            <EntityTypeMapping TypeName="k8sLoverModel.RootCauses">
+              <MappingFragment StoreEntitySet="RootCauses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SREMetrics">
+            <EntityTypeMapping TypeName="k8sLoverModel.SREMetrics">
+              <MappingFragment StoreEntitySet="SREMetrics">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StocksData">
+            <EntityTypeMapping TypeName="k8sLoverModel.StocksData">
+              <MappingFragment StoreEntitySet="StocksData">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="k8sLoverModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="k8sLoverModel.Teams">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="specialization" ColumnName="specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="IncidentToRootCauses" TypeName="k8sLoverModel.IncidentToRootCauses" StoreEntitySet="IncidentToRootCauses">
+            <EndProperty Name="Incidents">
+              <ScalarProperty Name="id" ColumnName="incident_id" />
+            </EndProperty>
+            <EndProperty Name="RootCauses">
+              <ScalarProperty Name="id" ColumnName="root_cause_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="IncidentToTypes" TypeName="k8sLoverModel.IncidentToTypes" StoreEntitySet="IncidentToTypes">
+            <EndProperty Name="Incidents">
+              <ScalarProperty Name="id" ColumnName="incident_id" />
+            </EndProperty>
+            <EndProperty Name="IncidentTypes">
+              <ScalarProperty Name="id" ColumnName="type_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

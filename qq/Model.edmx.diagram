@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="960f9d737fd74f868a8f2fbc30220446" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="k8sLoverModel.AvailabilityMetrics" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Companies" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Countries" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Currencies" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.ErrorRateMetrics" Width="1.5" PointX="7.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Incidents" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.IncidentTypes" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.News" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.RemediationActions" Width="1.5" PointX="10.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.ResponseTimeMetrics" Width="1.5" PointX="7.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.RootCauseCategories" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.RootCauses" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.SREMetrics" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.StocksData" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.sysdiagrams" Width="1.5" PointX="1.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Teams" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <AssociationConnector Association="k8sLoverModel.FK__Availabil__metri__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Companies__count__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Incidents__compa__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__SREMetric__compa__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__StocksDat__compa__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Teams__company_i__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__curre__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__ErrorRate__metri__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__News__incident_i__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__incid__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__team___5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__ResponseT__metri__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__RootCause__categ__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.IncidentToRootCauses" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.IncidentToTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
