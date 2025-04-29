@@ -160,6 +160,18 @@
           <Property Name="name" Type="varchar" MaxLength="255" />
           <Property Name="specialization" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK__Availabil__metri__5BE2A6F2">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
@@ -383,6 +395,7 @@
           <EntitySet Name="StocksData" EntityType="Self.StocksData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
@@ -626,6 +639,18 @@
           <NavigationProperty Name="Companies" Relationship="Self.FK__Teams__company_i__5070F446" FromRole="Teams" ToRole="Companies" />
           <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__team___5441852A" FromRole="Teams" ToRole="RemediationActions" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK__Availabil__metri__5BE2A6F2">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
@@ -807,6 +832,7 @@
           <EntitySet Name="StocksData" EntityType="Self.StocksData" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Teams" EntityType="Self.Teams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
@@ -1026,6 +1052,19 @@
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="specialization" ColumnName="specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="k8sLoverModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="960f9d737fd74f868a8f2fbc30220446" Name="Diagram1" ZoomLevel="93">
+      <Diagram DiagramId="7b559aaa13fe46b989da010dbe23e1b8" Name="Diagram1">
         <EntityTypeShape EntityType="k8sLoverModel.AvailabilityMetrics" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Companies" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Countries" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
@@ -19,8 +19,9 @@
         <EntityTypeShape EntityType="k8sLoverModel.RootCauses" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.SREMetrics" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.StocksData" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="k8sLoverModel.sysdiagrams" Width="1.5" PointX="1.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Teams" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="k8sLoverModel.Users" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="k8sLoverModel.FK__Availabil__metri__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="k8sLoverModel.FK__Companies__count__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="k8sLoverModel.FK__Incidents__compa__440B1D61" ManuallyRouted="false" />

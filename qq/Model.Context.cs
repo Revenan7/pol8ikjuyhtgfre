@@ -41,5 +41,6 @@ namespace qq
         public virtual DbSet<StocksData> StocksData { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Teams> Teams { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

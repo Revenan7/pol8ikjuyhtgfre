@@ -19,7 +19,7 @@ namespace qq
     public partial class MainWindow : Window
     {
 
-        public MainWindow()
+        public void qqMainWindow()
         {
             InitializeComponent();
            // AddItems();
@@ -37,10 +37,16 @@ namespace qq
 
             
         }
-
+        public MainWindow()
+        {
+            thisWindow = this;
+            InitializeComponent();
+        }
+        private static Window thisWindow;
+        public static void closeWindow() => thisWindow.Close();
         private void LoadCompanies()
         {
-            CompaniesGrid.ItemsSource = BDconnection.DB.Companies.ToList();
+            //CompaniesGrid.ItemsSource = BDconnection.DB.Companies.ToList();
         }
     }
 }
