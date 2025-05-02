@@ -55,9 +55,12 @@ namespace qq.Pages
             }
 
             string _password = GetHash(passwordText.Password);
-            
-            
-            var user = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.Login == loginTextBox.Text && u.Password == _password);
+
+
+            var user = BDconnection.DB.Users
+            .AsNoTracking()
+            .FirstOrDefault(u => u.login == loginTextBox.Text && u.password == _password);
+
             if (user == null) { MessageBox.Show("Пользователь с такими данными не найден!"); return; }
 
             else

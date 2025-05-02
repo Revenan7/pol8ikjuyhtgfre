@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище k8sLoverModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="k8sLoverModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AvailabilityMetrics">
           <Key>
             <PropertyRef Name="metric_id" />
@@ -75,7 +75,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="255" />
           <Property Name="impact_level" Type="int" />
-          <Property Name="recovery_time_goal" Type="int" />
+          <Property Name="recovery_time_goal_minutes" Type="int" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -162,17 +162,17 @@
         </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="login" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="text" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <Association Name="FK__Availabil__metri__5BE2A6F2">
+        <Association Name="FK__Availabil__metri__534D60F1">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -184,7 +184,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Companies__count__398D8EEE">
+        <Association Name="FK__Companies__count__30F848ED">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ErrorRate__metri__6383C8BA">
+        <Association Name="FK__ErrorRate__metri__5AEE82B9">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="ErrorRateMetrics" Type="Self.ErrorRateMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -208,7 +208,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Incidents__compa__440B1D61">
+        <Association Name="FK__Incidents__compa__3B75D760">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
           <ReferentialConstraint>
@@ -220,7 +220,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IncidentT__incid__46E78A0C">
+        <Association Name="FK__IncidentT__incid__3E52440B">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="1" />
           <End Role="IncidentToTypes" Type="Self.IncidentToTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,7 +232,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IncidentT__incid__4AB81AF0">
+        <Association Name="FK__IncidentT__incid__4222D4EF">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="1" />
           <End Role="IncidentToRootCauses" Type="Self.IncidentToRootCauses" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,7 +244,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IncidentT__root___4BAC3F29">
+        <Association Name="FK__IncidentT__root___4316F928">
           <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="1" />
           <End Role="IncidentToRootCauses" Type="Self.IncidentToRootCauses" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +256,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IncidentT__type___47DBAE45">
+        <Association Name="FK__IncidentT__type___3F466844">
           <End Role="IncidentTypes" Type="Self.IncidentTypes" Multiplicity="1" />
           <End Role="IncidentToTypes" Type="Self.IncidentToTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +268,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__News__incident_i__693CA210">
+        <Association Name="FK__News__incident_i__60A75C0F">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
@@ -280,7 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__curre__5535A963">
+        <Association Name="FK__Remediati__curre__4CA06362">
           <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -292,7 +292,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__incid__534D60F1">
+        <Association Name="FK__Remediati__incid__4AB81AF0">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +304,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__team___5441852A">
+        <Association Name="FK__Remediati__team___4BAC3F29">
           <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +316,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ResponseT__metri__5FB337D6">
+        <Association Name="FK__ResponseT__metri__571DF1D5">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="ResponseTimeMetrics" Type="Self.ResponseTimeMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -328,7 +328,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RootCause__categ__412EB0B6">
+        <Association Name="FK__RootCause__categ__38996AB5">
           <End Role="RootCauseCategories" Type="Self.RootCauseCategories" Multiplicity="0..1" />
           <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,7 +340,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SREMetric__compa__5812160E">
+        <Association Name="FK__SREMetric__compa__4F7CD00D">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="*" />
           <ReferentialConstraint>
@@ -352,7 +352,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StocksDat__compa__66603565">
+        <Association Name="FK__StocksDat__compa__5DCAEF64">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="StocksData" Type="Self.StocksData" Multiplicity="*" />
           <ReferentialConstraint>
@@ -364,7 +364,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Teams__company_i__5070F446">
+        <Association Name="FK__Teams__company_i__47DBAE45">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
           <ReferentialConstraint>
@@ -376,7 +376,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище k8sLoverModelContainer">
+        <EntityContainer Name="k8sLoverModelStoreContainer">
           <EntitySet Name="AvailabilityMetrics" EntityType="Self.AvailabilityMetrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
@@ -396,71 +396,71 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
+          <AssociationSet Name="FK__Availabil__metri__534D60F1" Association="Self.FK__Availabil__metri__534D60F1">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__Companies__count__398D8EEE" Association="Self.FK__Companies__count__398D8EEE">
+          <AssociationSet Name="FK__Companies__count__30F848ED" Association="Self.FK__Companies__count__30F848ED">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Companies" EntitySet="Companies" />
           </AssociationSet>
-          <AssociationSet Name="FK__ErrorRate__metri__6383C8BA" Association="Self.FK__ErrorRate__metri__6383C8BA">
+          <AssociationSet Name="FK__ErrorRate__metri__5AEE82B9" Association="Self.FK__ErrorRate__metri__5AEE82B9">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="ErrorRateMetrics" EntitySet="ErrorRateMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__Incidents__compa__440B1D61" Association="Self.FK__Incidents__compa__440B1D61">
+          <AssociationSet Name="FK__Incidents__compa__3B75D760" Association="Self.FK__Incidents__compa__3B75D760">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Incidents" EntitySet="Incidents" />
           </AssociationSet>
-          <AssociationSet Name="FK__IncidentT__incid__46E78A0C" Association="Self.FK__IncidentT__incid__46E78A0C">
+          <AssociationSet Name="FK__IncidentT__incid__3E52440B" Association="Self.FK__IncidentT__incid__3E52440B">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="IncidentToTypes" EntitySet="IncidentToTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__IncidentT__incid__4AB81AF0" Association="Self.FK__IncidentT__incid__4AB81AF0">
+          <AssociationSet Name="FK__IncidentT__incid__4222D4EF" Association="Self.FK__IncidentT__incid__4222D4EF">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="IncidentToRootCauses" EntitySet="IncidentToRootCauses" />
           </AssociationSet>
-          <AssociationSet Name="FK__IncidentT__root___4BAC3F29" Association="Self.FK__IncidentT__root___4BAC3F29">
+          <AssociationSet Name="FK__IncidentT__root___4316F928" Association="Self.FK__IncidentT__root___4316F928">
             <End Role="RootCauses" EntitySet="RootCauses" />
             <End Role="IncidentToRootCauses" EntitySet="IncidentToRootCauses" />
           </AssociationSet>
-          <AssociationSet Name="FK__IncidentT__type___47DBAE45" Association="Self.FK__IncidentT__type___47DBAE45">
+          <AssociationSet Name="FK__IncidentT__type___3F466844" Association="Self.FK__IncidentT__type___3F466844">
             <End Role="IncidentTypes" EntitySet="IncidentTypes" />
             <End Role="IncidentToTypes" EntitySet="IncidentToTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__News__incident_i__693CA210" Association="Self.FK__News__incident_i__693CA210">
+          <AssociationSet Name="FK__News__incident_i__60A75C0F" Association="Self.FK__News__incident_i__60A75C0F">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__curre__5535A963" Association="Self.FK__Remediati__curre__5535A963">
+          <AssociationSet Name="FK__Remediati__curre__4CA06362" Association="Self.FK__Remediati__curre__4CA06362">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__incid__534D60F1" Association="Self.FK__Remediati__incid__534D60F1">
+          <AssociationSet Name="FK__Remediati__incid__4AB81AF0" Association="Self.FK__Remediati__incid__4AB81AF0">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__team___5441852A" Association="Self.FK__Remediati__team___5441852A">
+          <AssociationSet Name="FK__Remediati__team___4BAC3F29" Association="Self.FK__Remediati__team___4BAC3F29">
             <End Role="Teams" EntitySet="Teams" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__ResponseT__metri__5FB337D6" Association="Self.FK__ResponseT__metri__5FB337D6">
+          <AssociationSet Name="FK__ResponseT__metri__571DF1D5" Association="Self.FK__ResponseT__metri__571DF1D5">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="ResponseTimeMetrics" EntitySet="ResponseTimeMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__RootCause__categ__412EB0B6" Association="Self.FK__RootCause__categ__412EB0B6">
+          <AssociationSet Name="FK__RootCause__categ__38996AB5" Association="Self.FK__RootCause__categ__38996AB5">
             <End Role="RootCauseCategories" EntitySet="RootCauseCategories" />
             <End Role="RootCauses" EntitySet="RootCauses" />
           </AssociationSet>
-          <AssociationSet Name="FK__SREMetric__compa__5812160E" Association="Self.FK__SREMetric__compa__5812160E">
+          <AssociationSet Name="FK__SREMetric__compa__4F7CD00D" Association="Self.FK__SREMetric__compa__4F7CD00D">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="SREMetrics" EntitySet="SREMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__StocksDat__compa__66603565" Association="Self.FK__StocksDat__compa__66603565">
+          <AssociationSet Name="FK__StocksDat__compa__5DCAEF64" Association="Self.FK__StocksDat__compa__5DCAEF64">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="StocksData" EntitySet="StocksData" />
           </AssociationSet>
-          <AssociationSet Name="FK__Teams__company_i__5070F446" Association="Self.FK__Teams__company_i__5070F446">
+          <AssociationSet Name="FK__Teams__company_i__47DBAE45" Association="Self.FK__Teams__company_i__47DBAE45">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Teams" EntitySet="Teams" />
           </AssociationSet>
@@ -476,7 +476,7 @@
           </Key>
           <Property Name="metric_id" Type="Int32" Nullable="false" />
           <Property Name="availability" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__Availabil__metri__5BE2A6F2" FromRole="AvailabilityMetrics" ToRole="SREMetrics" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__Availabil__metri__534D60F1" FromRole="AvailabilityMetrics" ToRole="SREMetrics" />
         </EntityType>
         <EntityType Name="Companies">
           <Key>
@@ -486,11 +486,11 @@
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="industry" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="country_id" Type="Int32" />
-          <NavigationProperty Name="Countries" Relationship="Self.FK__Companies__count__398D8EEE" FromRole="Companies" ToRole="Countries" />
-          <NavigationProperty Name="Incidents" Relationship="Self.FK__Incidents__compa__440B1D61" FromRole="Companies" ToRole="Incidents" />
-          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__SREMetric__compa__5812160E" FromRole="Companies" ToRole="SREMetrics" />
-          <NavigationProperty Name="StocksData" Relationship="Self.FK__StocksDat__compa__66603565" FromRole="Companies" ToRole="StocksData" />
-          <NavigationProperty Name="Teams" Relationship="Self.FK__Teams__company_i__5070F446" FromRole="Companies" ToRole="Teams" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK__Companies__count__30F848ED" FromRole="Companies" ToRole="Countries" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__Incidents__compa__3B75D760" FromRole="Companies" ToRole="Incidents" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__SREMetric__compa__4F7CD00D" FromRole="Companies" ToRole="SREMetrics" />
+          <NavigationProperty Name="StocksData" Relationship="Self.FK__StocksDat__compa__5DCAEF64" FromRole="Companies" ToRole="StocksData" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Teams__company_i__47DBAE45" FromRole="Companies" ToRole="Teams" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -498,7 +498,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__Companies__count__398D8EEE" FromRole="Countries" ToRole="Companies" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Companies__count__30F848ED" FromRole="Countries" ToRole="Companies" />
         </EntityType>
         <EntityType Name="Currencies">
           <Key>
@@ -506,7 +506,7 @@
           </Key>
           <Property Name="code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__curre__5535A963" FromRole="Currencies" ToRole="RemediationActions" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__curre__4CA06362" FromRole="Currencies" ToRole="RemediationActions" />
         </EntityType>
         <EntityType Name="ErrorRateMetrics">
           <Key>
@@ -514,7 +514,7 @@
           </Key>
           <Property Name="metric_id" Type="Int32" Nullable="false" />
           <Property Name="error_rate" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ErrorRate__metri__6383C8BA" FromRole="ErrorRateMetrics" ToRole="SREMetrics" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ErrorRate__metri__5AEE82B9" FromRole="ErrorRateMetrics" ToRole="SREMetrics" />
         </EntityType>
         <EntityType Name="Incidents">
           <Key>
@@ -525,9 +525,9 @@
           <Property Name="start_time" Type="DateTimeOffset" Precision="7" />
           <Property Name="end_time" Type="DateTimeOffset" Precision="7" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__Incidents__compa__440B1D61" FromRole="Incidents" ToRole="Companies" />
-          <NavigationProperty Name="News" Relationship="Self.FK__News__incident_i__693CA210" FromRole="Incidents" ToRole="News" />
-          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__incid__534D60F1" FromRole="Incidents" ToRole="RemediationActions" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Incidents__compa__3B75D760" FromRole="Incidents" ToRole="Companies" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__incident_i__60A75C0F" FromRole="Incidents" ToRole="News" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__incid__4AB81AF0" FromRole="Incidents" ToRole="RemediationActions" />
           <NavigationProperty Name="RootCauses" Relationship="Self.IncidentToRootCauses" FromRole="Incidents" ToRole="RootCauses" />
           <NavigationProperty Name="IncidentTypes" Relationship="Self.IncidentToTypes" FromRole="Incidents" ToRole="IncidentTypes" />
         </EntityType>
@@ -538,7 +538,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="impact_level" Type="Int32" />
-          <Property Name="recovery_time_goal" Type="Int32" />
+          <Property Name="recovery_time_goal_minutes" Type="Int32" />
           <NavigationProperty Name="Incidents" Relationship="Self.IncidentToTypes" FromRole="IncidentTypes" ToRole="Incidents" />
         </EntityType>
         <EntityType Name="News">
@@ -552,7 +552,7 @@
           <Property Name="source" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="popularity" Type="Int32" />
           <Property Name="sentiment_score" Type="Int32" />
-          <NavigationProperty Name="Incidents" Relationship="Self.FK__News__incident_i__693CA210" FromRole="News" ToRole="Incidents" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__News__incident_i__60A75C0F" FromRole="News" ToRole="Incidents" />
         </EntityType>
         <EntityType Name="RemediationActions">
           <Key>
@@ -564,9 +564,9 @@
           <Property Name="action_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="loss" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="currency_code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Currencies" Relationship="Self.FK__Remediati__curre__5535A963" FromRole="RemediationActions" ToRole="Currencies" />
-          <NavigationProperty Name="Incidents" Relationship="Self.FK__Remediati__incid__534D60F1" FromRole="RemediationActions" ToRole="Incidents" />
-          <NavigationProperty Name="Teams" Relationship="Self.FK__Remediati__team___5441852A" FromRole="RemediationActions" ToRole="Teams" />
+          <NavigationProperty Name="Currencies" Relationship="Self.FK__Remediati__curre__4CA06362" FromRole="RemediationActions" ToRole="Currencies" />
+          <NavigationProperty Name="Incidents" Relationship="Self.FK__Remediati__incid__4AB81AF0" FromRole="RemediationActions" ToRole="Incidents" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Remediati__team___4BAC3F29" FromRole="RemediationActions" ToRole="Teams" />
         </EntityType>
         <EntityType Name="ResponseTimeMetrics">
           <Key>
@@ -574,7 +574,7 @@
           </Key>
           <Property Name="metric_id" Type="Int32" Nullable="false" />
           <Property Name="avg_response_time" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ResponseT__metri__5FB337D6" FromRole="ResponseTimeMetrics" ToRole="SREMetrics" />
+          <NavigationProperty Name="SREMetrics" Relationship="Self.FK__ResponseT__metri__571DF1D5" FromRole="ResponseTimeMetrics" ToRole="SREMetrics" />
         </EntityType>
         <EntityType Name="RootCauseCategories">
           <Key>
@@ -582,7 +582,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RootCauses" Relationship="Self.FK__RootCause__categ__412EB0B6" FromRole="RootCauseCategories" ToRole="RootCauses" />
+          <NavigationProperty Name="RootCauses" Relationship="Self.FK__RootCause__categ__38996AB5" FromRole="RootCauseCategories" ToRole="RootCauses" />
         </EntityType>
         <EntityType Name="RootCauses">
           <Key>
@@ -592,7 +592,7 @@
           <Property Name="category_id" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RootCauseCategories" Relationship="Self.FK__RootCause__categ__412EB0B6" FromRole="RootCauses" ToRole="RootCauseCategories" />
+          <NavigationProperty Name="RootCauseCategories" Relationship="Self.FK__RootCause__categ__38996AB5" FromRole="RootCauses" ToRole="RootCauseCategories" />
           <NavigationProperty Name="Incidents" Relationship="Self.IncidentToRootCauses" FromRole="RootCauses" ToRole="Incidents" />
         </EntityType>
         <EntityType Name="SREMetrics">
@@ -602,10 +602,10 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="company_id" Type="Int32" />
           <Property Name="timestamp" Type="DateTimeOffset" Precision="7" />
-          <NavigationProperty Name="AvailabilityMetrics" Relationship="Self.FK__Availabil__metri__5BE2A6F2" FromRole="SREMetrics" ToRole="AvailabilityMetrics" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__SREMetric__compa__5812160E" FromRole="SREMetrics" ToRole="Companies" />
-          <NavigationProperty Name="ErrorRateMetrics" Relationship="Self.FK__ErrorRate__metri__6383C8BA" FromRole="SREMetrics" ToRole="ErrorRateMetrics" />
-          <NavigationProperty Name="ResponseTimeMetrics" Relationship="Self.FK__ResponseT__metri__5FB337D6" FromRole="SREMetrics" ToRole="ResponseTimeMetrics" />
+          <NavigationProperty Name="AvailabilityMetrics" Relationship="Self.FK__Availabil__metri__534D60F1" FromRole="SREMetrics" ToRole="AvailabilityMetrics" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__SREMetric__compa__4F7CD00D" FromRole="SREMetrics" ToRole="Companies" />
+          <NavigationProperty Name="ErrorRateMetrics" Relationship="Self.FK__ErrorRate__metri__5AEE82B9" FromRole="SREMetrics" ToRole="ErrorRateMetrics" />
+          <NavigationProperty Name="ResponseTimeMetrics" Relationship="Self.FK__ResponseT__metri__571DF1D5" FromRole="SREMetrics" ToRole="ResponseTimeMetrics" />
         </EntityType>
         <EntityType Name="StocksData">
           <Key>
@@ -616,7 +616,7 @@
           <Property Name="timestamp" Type="DateTimeOffset" Precision="7" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="volume" Type="Int32" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__StocksDat__compa__66603565" FromRole="StocksData" ToRole="Companies" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__StocksDat__compa__5DCAEF64" FromRole="StocksData" ToRole="Companies" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -636,22 +636,22 @@
           <Property Name="company_id" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="specialization" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__Teams__company_i__5070F446" FromRole="Teams" ToRole="Companies" />
-          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__team___5441852A" FromRole="Teams" ToRole="RemediationActions" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Teams__company_i__47DBAE45" FromRole="Teams" ToRole="Companies" />
+          <NavigationProperty Name="RemediationActions" Relationship="Self.FK__Remediati__team___4BAC3F29" FromRole="Teams" ToRole="RemediationActions" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK__Availabil__metri__5BE2A6F2">
+        <Association Name="FK__Availabil__metri__534D60F1">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="AvailabilityMetrics" Type="Self.AvailabilityMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -663,7 +663,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Companies__count__398D8EEE">
+        <Association Name="FK__Companies__count__30F848ED">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -675,7 +675,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Incidents__compa__440B1D61">
+        <Association Name="FK__Incidents__compa__3B75D760">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="*" />
           <ReferentialConstraint>
@@ -687,7 +687,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SREMetric__compa__5812160E">
+        <Association Name="FK__SREMetric__compa__4F7CD00D">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="*" />
           <ReferentialConstraint>
@@ -699,7 +699,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StocksDat__compa__66603565">
+        <Association Name="FK__StocksDat__compa__5DCAEF64">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="StocksData" Type="Self.StocksData" Multiplicity="*" />
           <ReferentialConstraint>
@@ -711,7 +711,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Teams__company_i__5070F446">
+        <Association Name="FK__Teams__company_i__47DBAE45">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
           <ReferentialConstraint>
@@ -723,7 +723,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__curre__5535A963">
+        <Association Name="FK__Remediati__curre__4CA06362">
           <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -735,7 +735,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ErrorRate__metri__6383C8BA">
+        <Association Name="FK__ErrorRate__metri__5AEE82B9">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="ErrorRateMetrics" Type="Self.ErrorRateMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -747,7 +747,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__News__incident_i__693CA210">
+        <Association Name="FK__News__incident_i__60A75C0F">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
@@ -759,7 +759,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__incid__534D60F1">
+        <Association Name="FK__Remediati__incid__4AB81AF0">
           <End Role="Incidents" Type="Self.Incidents" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -771,7 +771,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Remediati__team___5441852A">
+        <Association Name="FK__Remediati__team___4BAC3F29">
           <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
           <End Role="RemediationActions" Type="Self.RemediationActions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -783,7 +783,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ResponseT__metri__5FB337D6">
+        <Association Name="FK__ResponseT__metri__571DF1D5">
           <End Role="SREMetrics" Type="Self.SREMetrics" Multiplicity="1" />
           <End Role="ResponseTimeMetrics" Type="Self.ResponseTimeMetrics" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -795,7 +795,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RootCause__categ__412EB0B6">
+        <Association Name="FK__RootCause__categ__38996AB5">
           <End Role="RootCauseCategories" Type="Self.RootCauseCategories" Multiplicity="0..1" />
           <End Role="RootCauses" Type="Self.RootCauses" Multiplicity="*" />
           <ReferentialConstraint>
@@ -833,55 +833,55 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Teams" EntityType="Self.Teams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK__Availabil__metri__5BE2A6F2" Association="Self.FK__Availabil__metri__5BE2A6F2">
+          <AssociationSet Name="FK__Availabil__metri__534D60F1" Association="Self.FK__Availabil__metri__534D60F1">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="AvailabilityMetrics" EntitySet="AvailabilityMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__Companies__count__398D8EEE" Association="Self.FK__Companies__count__398D8EEE">
+          <AssociationSet Name="FK__Companies__count__30F848ED" Association="Self.FK__Companies__count__30F848ED">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Companies" EntitySet="Companies" />
           </AssociationSet>
-          <AssociationSet Name="FK__Incidents__compa__440B1D61" Association="Self.FK__Incidents__compa__440B1D61">
+          <AssociationSet Name="FK__Incidents__compa__3B75D760" Association="Self.FK__Incidents__compa__3B75D760">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Incidents" EntitySet="Incidents" />
           </AssociationSet>
-          <AssociationSet Name="FK__SREMetric__compa__5812160E" Association="Self.FK__SREMetric__compa__5812160E">
+          <AssociationSet Name="FK__SREMetric__compa__4F7CD00D" Association="Self.FK__SREMetric__compa__4F7CD00D">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="SREMetrics" EntitySet="SREMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__StocksDat__compa__66603565" Association="Self.FK__StocksDat__compa__66603565">
+          <AssociationSet Name="FK__StocksDat__compa__5DCAEF64" Association="Self.FK__StocksDat__compa__5DCAEF64">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="StocksData" EntitySet="StocksData" />
           </AssociationSet>
-          <AssociationSet Name="FK__Teams__company_i__5070F446" Association="Self.FK__Teams__company_i__5070F446">
+          <AssociationSet Name="FK__Teams__company_i__47DBAE45" Association="Self.FK__Teams__company_i__47DBAE45">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Teams" EntitySet="Teams" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__curre__5535A963" Association="Self.FK__Remediati__curre__5535A963">
+          <AssociationSet Name="FK__Remediati__curre__4CA06362" Association="Self.FK__Remediati__curre__4CA06362">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__ErrorRate__metri__6383C8BA" Association="Self.FK__ErrorRate__metri__6383C8BA">
+          <AssociationSet Name="FK__ErrorRate__metri__5AEE82B9" Association="Self.FK__ErrorRate__metri__5AEE82B9">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="ErrorRateMetrics" EntitySet="ErrorRateMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__News__incident_i__693CA210" Association="Self.FK__News__incident_i__693CA210">
+          <AssociationSet Name="FK__News__incident_i__60A75C0F" Association="Self.FK__News__incident_i__60A75C0F">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__incid__534D60F1" Association="Self.FK__Remediati__incid__534D60F1">
+          <AssociationSet Name="FK__Remediati__incid__4AB81AF0" Association="Self.FK__Remediati__incid__4AB81AF0">
             <End Role="Incidents" EntitySet="Incidents" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Remediati__team___5441852A" Association="Self.FK__Remediati__team___5441852A">
+          <AssociationSet Name="FK__Remediati__team___4BAC3F29" Association="Self.FK__Remediati__team___4BAC3F29">
             <End Role="Teams" EntitySet="Teams" />
             <End Role="RemediationActions" EntitySet="RemediationActions" />
           </AssociationSet>
-          <AssociationSet Name="FK__ResponseT__metri__5FB337D6" Association="Self.FK__ResponseT__metri__5FB337D6">
+          <AssociationSet Name="FK__ResponseT__metri__571DF1D5" Association="Self.FK__ResponseT__metri__571DF1D5">
             <End Role="SREMetrics" EntitySet="SREMetrics" />
             <End Role="ResponseTimeMetrics" EntitySet="ResponseTimeMetrics" />
           </AssociationSet>
-          <AssociationSet Name="FK__RootCause__categ__412EB0B6" Association="Self.FK__RootCause__categ__412EB0B6">
+          <AssociationSet Name="FK__RootCause__categ__38996AB5" Association="Self.FK__RootCause__categ__38996AB5">
             <End Role="RootCauseCategories" EntitySet="RootCauseCategories" />
             <End Role="RootCauses" EntitySet="RootCauses" />
           </AssociationSet>
@@ -899,7 +899,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище k8sLoverModelContainer" CdmEntityContainer="k8sLoverEntities">
+        <EntityContainerMapping StorageEntityContainer="k8sLoverModelStoreContainer" CdmEntityContainer="k8sLoverEntities">
           <EntitySetMapping Name="AvailabilityMetrics">
             <EntityTypeMapping TypeName="k8sLoverModel.AvailabilityMetrics">
               <MappingFragment StoreEntitySet="AvailabilityMetrics">
@@ -959,7 +959,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="impact_level" ColumnName="impact_level" />
-                <ScalarProperty Name="recovery_time_goal" ColumnName="recovery_time_goal" />
+                <ScalarProperty Name="recovery_time_goal_minutes" ColumnName="recovery_time_goal_minutes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1058,13 +1058,13 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="k8sLoverModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1101,7 +1101,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

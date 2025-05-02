@@ -60,7 +60,7 @@ namespace qq.Pages
             {
 
                 
-                    var user = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.Login == loginText.Text);
+                    var user = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.login == loginText.Text);
                     if (user != null) { MessageBox.Show("Пользователь с такими данными уже существует!"); return; }
                 
                 if (passwordText.Password.Length > 0)
@@ -87,12 +87,12 @@ namespace qq.Pages
                         {
                             Users userObject = new Users
                             {
-                                FirstName = nameText.Text,
-                                LastName = surnameText.Text,
-                                Login = loginText.Text,
-                                Password = GetHash(passwordText.Password),
-                                Email = emailText.Text,
-                                Phone = phoneText.Text,
+                                first_name = nameText.Text,
+                                last_name = surnameText.Text,
+                                login = loginText.Text,
+                                password = GetHash(passwordText.Password),
+                                email = emailText.Text,
+                                phone = phoneText.Text,
                             };
                             BDconnection.DB.Users.Add(userObject);
                             BDconnection.DB.SaveChanges();
