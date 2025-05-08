@@ -335,8 +335,8 @@
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="1,0" MappingMode="RelativeToBoundingBox" StartPoint="0,1">
-                    <GradientStop Color="#ffb700"/>
-                    <GradientStop Color="#ff7f08" Offset="1"/>
+                    <GradientStop Color="#002F55"/>
+                    <GradientStop Color="#003153" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -355,8 +355,8 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush EndPoint="1,0" MappingMode="RelativeToBoundingBox" StartPoint="0,1">
-                            <GradientStop Color="#ffb700"/>
-                            <GradientStop Color="#ff7f08" Offset="1"/>
+                            <GradientStop Color="#002F55"/>
+                            <GradientStop Color="#003153" Offset="1"/>
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -413,8 +413,8 @@
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="1,0" MappingMode="RelativeToBoundingBox" StartPoint="0,1">
-                    <GradientStop Color="#ffb700"/>
-                    <GradientStop Color="#ff7f08" Offset="1"/>
+                    <GradientStop Color="#002F55"/>
+                    <GradientStop Color="#003153" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -433,8 +433,8 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush EndPoint="1,0" MappingMode="RelativeToBoundingBox" StartPoint="0,1">
-                            <GradientStop Color="#ffb700"/>
-                            <GradientStop Color="#ff7f08" Offset="1"/>
+                            <GradientStop Color="#002F55"/>
+                            <GradientStop Color="#003153" Offset="1"/>
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>

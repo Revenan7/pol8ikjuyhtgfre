@@ -40,7 +40,6 @@ namespace qq.Pages
             qq.industry = "test";
             qq.name = "test";
             BDconnection.DB.Companies.Add(qq);
-            //BDconnection.
             BDconnection.DB.SaveChanges();
 
 
@@ -65,7 +64,8 @@ namespace qq.Pages
 
             else
             {
-                var newWindow = new UserWindow(user);
+                //var newWindow = new UserWindow(user);
+                var newWindow = new AnalystWindow(user);
                 newWindow.Show();
                 MainWindow.closeWindow();
             }

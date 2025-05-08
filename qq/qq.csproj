@@ -149,6 +149,9 @@
     <Compile Include="News.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AnalystWindow.xaml.cs">
+      <DependentUpon>AnalystWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AuthLog.xaml.cs">
       <DependentUpon>AuthLog.xaml</DependentUpon>
     </Compile>
@@ -179,9 +182,6 @@
     <Compile Include="StocksData.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Teams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -200,6 +200,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AnalystWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AuthLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

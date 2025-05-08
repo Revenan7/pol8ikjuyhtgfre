@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6ff49b13a9214321bdada8b8a3adbff9" Name="Diagram1" ZoomLevel="112">
+      <Diagram DiagramId="77acea9915494b19905fb05be369cb3d" Name="Diagram1">
         <EntityTypeShape EntityType="k8sLoverModel.AvailabilityMetrics" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Companies" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Countries" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
@@ -19,22 +19,21 @@
         <EntityTypeShape EntityType="k8sLoverModel.RootCauses" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.SREMetrics" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.StocksData" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="k8sLoverModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="k8sLoverModel.Teams" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="k8sLoverModel.Users" Width="1.5" PointX="4.375" PointY="2" IsExpanded="true" />
-        <AssociationConnector Association="k8sLoverModel.FK__Availabil__metri__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Companies__count__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Incidents__compa__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__SREMetric__compa__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__StocksDat__compa__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Teams__company_i__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Remediati__curre__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__ErrorRate__metri__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__News__incident_i__60A75C0F" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Remediati__incid__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__Remediati__team___4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__ResponseT__metri__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="k8sLoverModel.FK__RootCause__categ__38996AB5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="k8sLoverModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="k8sLoverModel.FK__Availabil__metri__7D0E9093" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Companies__count__5AB9788F" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Incidents__compa__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__SREMetric__compa__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__StocksDat__compa__078C1F06" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Teams__company_i__681373AD" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__curre__6EC0713C" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__ErrorRate__metri__04AFB25B" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__News__incident_i__0A688BB1" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__incid__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__Remediati__team___6DCC4D03" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__ResponseT__metri__00DF2177" ManuallyRouted="false" />
+        <AssociationConnector Association="k8sLoverModel.FK__RootCause__categ__625A9A57" ManuallyRouted="false" />
         <AssociationConnector Association="k8sLoverModel.IncidentToRootCauses" ManuallyRouted="false" />
         <AssociationConnector Association="k8sLoverModel.IncidentToTypes" ManuallyRouted="false" />
       </Diagram>
