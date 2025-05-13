@@ -158,6 +158,12 @@
     <Compile Include="Pages\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ScribeNewsWindow.xaml.cs">
+      <DependentUpon>ScribeNewsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SreMetricsWindow.xaml.cs">
+      <DependentUpon>SreMetricsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
@@ -209,6 +215,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ScribeNewsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SreMetricsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -82,6 +82,10 @@ namespace qq.Pages
                             MessageBox.Show("Введите корректный номер телефона в формате +7XXXXXXXXXX.", "Ошибка!", MessageBoxButton.OK);
                         else if (!isValidMail(emailText.Text))
                             MessageBox.Show("Введите корректный e-mail.", "Ошибка!", MessageBoxButton.OK);
+                        string selectedRole = (roleComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+                        var user2 = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.email == emailText.Text);
+                        if (user2 != null) { MessageBox.Show("Пользователь с таким Email уже существует!"); return; }
 
                         if (en && number && regex.IsMatch(phoneText.Text) && isValidMail(emailText.Text))
                         {
@@ -92,6 +96,7 @@ namespace qq.Pages
                                 login = loginText.Text,
                                 password = GetHash(passwordText.Password),
                                 email = emailText.Text,
+                                role = selectedRole,
                                 phone = phoneText.Text,
                             };
                             BDconnection.DB.Users.Add(userObject);

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="blackBackground">
-        <Setter Property="Control.Background" Value="#FF181818"/>
+        <Setter Property="Control.Background" Value="White"/>
     </Style>
     <Style x:Key="yellowBackground">
         <Setter Property="Control.Background" Value="#FFE98C1A"/>

@@ -64,14 +64,34 @@ namespace qq.Pages
 
             else
             {
-                //var newWindow = new UserWindow(user);
-                var newWindow = new AnalystWindow(user);
-                newWindow.Show();
-                MainWindow.closeWindow();
+                if (user.role == "Analyst")
+                {
+                    var newWindow = new SreMetricsWindow();
+                    newWindow.Show();
+                    MainWindow.closeWindow();
+                }
+                else if (user.role == "Writer")
+                {
+                    var newWindow = new ScribeNewsWindow();
+                    newWindow.Show();
+                    MainWindow.closeWindow();
+                }
+                else if (user.role == "SRE")
+                {
+                    var newWindow = new AnalystWindow(user);
+                    newWindow.Show();
+                    MainWindow.closeWindow();
+                }
+                else
+                {
+
+                    MessageBox.Show("Неизвестная роль пользователя!");
+                }
             }
-           
-            
         }
+        
+           
+        
 
         private void register_Click(object sender, RoutedEventArgs e) => NavigationService.Navigate((new Uri("/Pages/Registration.xaml", UriKind.Relative)));
     }
