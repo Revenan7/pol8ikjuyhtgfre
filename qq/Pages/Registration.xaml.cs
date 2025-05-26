@@ -20,15 +20,23 @@ using System.Windows.Shapes;
 namespace qq.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Страница регистрации пользователя
     /// </summary>
     public partial class Registration : Page
     {
+        /// <summary>
+        /// Конструктор страницы регистрации
+        /// </summary>
         public Registration()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Получить хеш пароля методом SHA1
+        /// </summary>
+        /// <param name="password">Пароль для хеширования</param>
+        /// <returns>Хешированная строка пароля</returns>
         public static string GetHash(string password)
         {
             using (var hash = SHA1.Create())
@@ -36,6 +44,12 @@ namespace qq.Pages
                 return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x => x.ToString("X2")));
             }
         }
+
+        /// <summary>
+        /// Проверка корректности email
+        /// </summary>
+        /// <param name="mail">Email для проверки</param>
+        /// <returns>True, если email валиден</returns>
         private bool isValidMail(string mail)
         {
             var regex = new Regex(@"^(\w+\@\w+\.\w+)$");
@@ -52,17 +66,25 @@ namespace qq.Pages
             }
         }
 
+        /// <summary>
+        /// Обработка нажатия кнопки "Войти"
+        /// </summary>
+        /// <param name="sender">Объект вызова</param>
+        /// <param name="e">Аргументы события</param>
         private void loginButton_Click(object sender, RoutedEventArgs e) => NavigationService.Navigate((new Uri("/Pages/AuthLog.xaml", UriKind.Relative)));
 
+        /// <summary>
+        /// Обработка нажатия кнопки "Зарегистрироваться"
+        /// </summary>
+        /// <param name="sender">Объект вызова</param>
+        /// <param name="e">Аргументы события</param>
         private void signUpButton_Click(object sender, RoutedEventArgs e)
         {
             if (loginText.Text.Length > 0)
             {
+                var user = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.login == loginText.Text);
+                if (user != null) { MessageBox.Show("Пользователь с такими данными уже существует!"); return; }
 
-                
-                    var user = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.login == loginText.Text);
-                    if (user != null) { MessageBox.Show("Пользователь с такими данными уже существует!"); return; }
-                
                 if (passwordText.Password.Length > 0)
                 {
                     if (passwordText.Password.Length > 6)
@@ -82,6 +104,7 @@ namespace qq.Pages
                             MessageBox.Show("Введите корректный номер телефона в формате +7XXXXXXXXXX.", "Ошибка!", MessageBoxButton.OK);
                         else if (!isValidMail(emailText.Text))
                             MessageBox.Show("Введите корректный e-mail.", "Ошибка!", MessageBoxButton.OK);
+
                         string selectedRole = (roleComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
                         var user2 = BDconnection.DB.Users.AsNoTracking().FirstOrDefault(u => u.email == emailText.Text);
@@ -106,8 +129,6 @@ namespace qq.Pages
                         }
                     }
                     else MessageBox.Show("Данный пароль слишком короткий, минимум 6 символов");
-
-
                 }
                 else MessageBox.Show("Укажите пароль!");
             }

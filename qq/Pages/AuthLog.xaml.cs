@@ -44,7 +44,12 @@ namespace qq.Pages
 
 
         }
-
+        /// <summary>
+        /// авторизует пользователя по логину и паролю
+        /// </summary>
+        /// <param name="login">логин пользователя</param>
+        /// <param name="password">пароль пользователя</param>
+        /// <returns>результат авторизации: true — если вход успешен</returns>
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(loginTextBox.Text) || string.IsNullOrEmpty(passwordText.Password))
@@ -66,7 +71,7 @@ namespace qq.Pages
             {
                 if (user.role == "Analyst")
                 {
-                    var newWindow = new SreMetricsWindow();
+                    var newWindow = new AnalystWindow(user);
                     newWindow.Show();
                     MainWindow.closeWindow();
                 }
@@ -78,7 +83,8 @@ namespace qq.Pages
                 }
                 else if (user.role == "SRE")
                 {
-                    var newWindow = new AnalystWindow(user);
+                    
+                    var newWindow = new SreMetricsWindow();
                     newWindow.Show();
                     MainWindow.closeWindow();
                 }

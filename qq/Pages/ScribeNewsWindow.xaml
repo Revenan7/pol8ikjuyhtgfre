@@ -5,22 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:qq.Pages"
         mc:Ignorable="d"
-        Title="ScribeNewsWindow" Height="600" Width="800">
-    
+        Title="ScribeNewsWindow" Height="650" Width="900">
+
     <Window.Resources>
         <CollectionViewSource x:Key="GroupedNews" />
     </Window.Resources>
 
     <Grid Margin="20">
+        <!-- строки -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/> <!-- инциденты -->
-            <RowDefinition Height="Auto"/> <!-- подпись -->
-            <RowDefinition Height="100"/> <!-- описание -->
-            <RowDefinition Height="Auto"/> <!-- кнопка -->
-            <RowDefinition Height="*"/> <!-- список новостей -->
+            <RowDefinition Height="220"/>
+            <!-- инциденты -->
+            <RowDefinition Height="Auto"/>
+            <!-- подпись -->
+            <RowDefinition Height="90"/>
+            <!-- описание для быстрого добавления -->
+            <RowDefinition Height="Auto"/>
+            <!-- кнопка "добавить" -->
+            <RowDefinition Height="220"/>
+            <!-- CRUD-таблица новостей выбранного инцидента -->
+            <RowDefinition Height="*"/>
+            <!-- общий список всех новостей (группировка) -->
         </Grid.RowDefinitions>
 
-        <!-- Список инцидентов -->
+        <!-- 1. Инциденты -->
         <DataGrid x:Name="IncidentsDataGrid"
                   Grid.Row="0"
                   AutoGenerateColumns="False"
@@ -28,15 +36,17 @@
                   SelectionChanged="IncidentsDataGrid_SelectionChanged"
                   Margin="0,0,0,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="50"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="60"/>
                 <DataGridTextColumn Header="Описание" Binding="{Binding description}" Width="*"/>
-                <DataGridTextColumn Header="Начало" Binding="{Binding start_time}" Width="150"/>
-                <DataGridTextColumn Header="Конец" Binding="{Binding end_time}" Width="150"/>
+                <DataGridTextColumn Header="Начало" Binding="{Binding start_time}" Width="160"/>
+                <DataGridTextColumn Header="Конец" Binding="{Binding end_time}" Width="160"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBlock Grid.Row="1" Text="Описание новости:" Margin="0,10,0,5"/>
-        
+        <!-- 2. Подпись -->
+        <TextBlock Grid.Row="1" Text="Быстрое добавление новости:" Margin="0,10,0,5"/>
+
+        <!-- 3. Краткое описание для Add -->
         <TextBox x:Name="DescriptionTextBox"
                  Grid.Row="2"
                  AcceptsReturn="True"
@@ -44,14 +54,34 @@
                  VerticalScrollBarVisibility="Auto"
                  Margin="0,0,0,10"/>
 
+        <!-- 4. Кнопка Add -->
         <Button Grid.Row="3" Content="Добавить новость"
-                Width="150"
+                Width="160"
                 Height="35"
-                Click="AddNewsButton_Click"
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left"
+                Click="AddNewsButton_Click"/>
 
-        <!-- Список всех новостей, сгруппированных по инциденту -->
-        <ListView Grid.Row="4"
+        <!-- 5. CRUD-таблица новостей выбранного инцидента -->
+        <DataGrid x:Name="NewsDataGrid"
+                  Grid.Row="4"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="True"
+                  RowEditEnding="NewsDataGrid_RowEditEnding"
+                  AddingNewItem="NewsDataGrid_AddingNewItem"
+                  Margin="0,10,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="50" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Заголовок" Binding="{Binding title}" Width="*"/>
+                <DataGridTextColumn Header="Источник" Binding="{Binding source}" Width="120"/>
+                <DataGridTextColumn Header="Популярность" Binding="{Binding popularity}" Width="110"/>
+                <DataGridTextColumn Header="Sentiment" Binding="{Binding sentiment_score}" Width="90"/>
+                <DataGridTextColumn Header="Опубликовано" Binding="{Binding published_at}" Width="150" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- 6. Общий список всех новостей, сгруппированных по инциденту -->
+        <ListView Grid.Row="5"
                   ItemsSource="{Binding Source={StaticResource GroupedNews}}"
                   Margin="0,20,0,0">
             <ListView.GroupStyle>
@@ -77,6 +107,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 </Window>
